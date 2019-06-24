@@ -1,5 +1,7 @@
 package com.ofcoder.farpc.registry;
 
+import com.ofcoder.farpc.registry.zookeeper.ZookeeperRegistrarImpl;
+
 /**
  * @author far.liu
  */

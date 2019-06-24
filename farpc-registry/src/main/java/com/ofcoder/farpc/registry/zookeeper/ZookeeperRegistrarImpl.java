@@ -1,7 +1,8 @@
-package com.ofcoder.farpc.registry;
+package com.ofcoder.farpc.registry.zookeeper;
 
 import com.ofcoder.farpc.cluster.ILoadbalance;
 import com.ofcoder.farpc.cluster.RandomLoadbalanceImpl;
+import com.ofcoder.farpc.registry.IRegistrar;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.framework.recipes.cache.PathChildrenCache;

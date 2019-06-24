@@ -1,4 +1,4 @@
-package com.ofcoder.farpc.registry;
+package com.ofcoder.farpc.registry.zookeeper;
 
 /**
  * @author far.liu
