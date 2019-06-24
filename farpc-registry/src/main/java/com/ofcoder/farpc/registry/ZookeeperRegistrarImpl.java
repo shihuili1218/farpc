@@ -32,7 +32,7 @@ public class ZookeeperRegistrarImpl implements IRegistrar {
         curatorFramework.start();
     }
 
-    public void regsiter(String providerAddress, String service) {
+    public void register(String providerAddress, String service) {
         try {
             String servicePath = ZookeeperConfig.FOLDER + SEPARATOR + service;
             Stat stat = curatorFramework.checkExists().forPath(servicePath);

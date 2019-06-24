@@ -5,5 +5,7 @@ package com.ofcoder.farpc.registry;
  */
 public interface IRegistrar {
 
-    void regsiter(String providerAddress, String service);
+    void register(String providerAddress, String service);
+
+//    void subscribe();
 }
