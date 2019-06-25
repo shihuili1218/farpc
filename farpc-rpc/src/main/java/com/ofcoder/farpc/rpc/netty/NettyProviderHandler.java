@@ -10,11 +10,11 @@ import java.util.Map;
 /**
  * @author far.liu
  */
-public class RpcServerHandler extends ChannelInboundHandlerAdapter {
+public class NettyProviderHandler extends ChannelInboundHandlerAdapter {
 
     private Map<String, Object> providers;
 
-    public RpcServerHandler(Map<String, Object> providers) {
+    public NettyProviderHandler(Map<String, Object> providers) {
         this.providers = providers;
     }
 

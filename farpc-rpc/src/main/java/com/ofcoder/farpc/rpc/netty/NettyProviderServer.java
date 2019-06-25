@@ -26,8 +26,8 @@ import java.util.Map;
 /**
  * @author far.liu
  */
-public class RpcServer {
-    private static final Logger logger = LoggerFactory.getLogger(RpcServer.class);
+public class NettyProviderServer {
+    private static final Logger logger = LoggerFactory.getLogger(NettyProviderServer.class);
     private IRegistrar registrar;
     private String selfAddress;
     private Map<String, Object> providers = new HashMap<String, Object>();
@@ -51,8 +51,10 @@ public class RpcServer {
 
         // 启动服务
         try {
-            EventLoopGroup bossGroup = new NioEventLoopGroup(0, new DefaultThreadFactory("qos-boss", true));
-            EventLoopGroup workerGroup = new NioEventLoopGroup(0, new DefaultThreadFactory("qos-worker", true));
+//            EventLoopGroup bossGroup = new NioEventLoopGroup(0, new DefaultThreadFactory("qos-boss", true));
+//            EventLoopGroup workerGroup = new NioEventLoopGroup(0, new DefaultThreadFactory("qos-worker", true));
+            EventLoopGroup bossGroup = new NioEventLoopGroup();
+            EventLoopGroup workerGroup = new NioEventLoopGroup();
 
             ServerBootstrap bootstrap = new ServerBootstrap();
             bootstrap.group(bossGroup, workerGroup)
@@ -64,8 +66,8 @@ public class RpcServer {
                             pipeline.addLast("frameDecoder", new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 0, 4));
                             pipeline.addLast("frameEncoder", new LengthFieldPrepender(4));
                             pipeline.addLast("encoder", new ObjectEncoder());
-                            pipeline.addLast("decoder", new ObjectDecoder(Integer.MAX_VALUE, ClassResolvers.softCachingResolver(RpcServer.class.getClassLoader())));
-                            pipeline.addLast(new RpcServerHandler(providers));
+                            pipeline.addLast("decoder", new ObjectDecoder(Integer.MAX_VALUE, ClassResolvers.softCachingResolver(NettyProviderServer.class.getClassLoader())));
+                            pipeline.addLast(new NettyProviderHandler(providers));
                         }
                     }).option(ChannelOption.SO_BACKLOG, 128).childOption(ChannelOption.SO_KEEPALIVE, true);
             String[] addrs = selfAddress.split(":");
