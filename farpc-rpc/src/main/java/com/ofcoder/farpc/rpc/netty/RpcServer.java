@@ -56,9 +56,9 @@ public class RpcServer {
             ServerBootstrap bootstrap = new ServerBootstrap();
             bootstrap.group(bossGroup, workerGroup)
                     .channel(NioSctpServerChannel.class)
-                    .childHandler(new ChannelInitializer<SocketChannel>() {
+                    .childHandler(new ChannelInitializer<Channel>() {
                         @Override
-                        protected void initChannel(SocketChannel channel) throws Exception {
+                        protected void initChannel(Channel channel) throws Exception {
                             ChannelPipeline pipeline = channel.pipeline();
                             pipeline.addLast("frameDecoder", new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 0, 4));
                             pipeline.addLast("frameEncoder", new LengthFieldPrepender(4));
