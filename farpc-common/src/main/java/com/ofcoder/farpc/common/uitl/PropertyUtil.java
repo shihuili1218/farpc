@@ -30,7 +30,7 @@ public class PropertyUtil {
     private void initProperty() {
         InputStream inputStream = null;
         try {
-            inputStream = getClass().getClassLoader().getResourceAsStream("application.yml");
+            inputStream = getClass().getClassLoader().getResourceAsStream("application.properties");
             property = new Properties();
             property.load(inputStream);
         } catch (IOException e) {

@@ -11,19 +11,13 @@ public class Property {
     private static String REGISTRY_ADDRESS_KEY = "farpc.registry.address";
     private static String CLUSTER_LOADBALANCE_KEY = "farpc.cluster.loadbalance";
 
-    static {
-        Registry.protocol = PropertyUtil.getInstance().get(REGISTRY_PROTOCOL_KEY);
-        Registry.address = PropertyUtil.getInstance().get(REGISTRY_ADDRESS_KEY);
-        Cluster.loadbalance = PropertyUtil.getInstance().get(CLUSTER_LOADBALANCE_KEY);
-    }
-
     public static class Registry {
-        public static String protocol;
-        public static String address;
+        public static String protocol = PropertyUtil.getInstance().get(REGISTRY_PROTOCOL_KEY);
+        public static String address = PropertyUtil.getInstance().get(REGISTRY_ADDRESS_KEY);
     }
 
     public static class Cluster {
-        public static String loadbalance;
+        public static String loadbalance = PropertyUtil.getInstance().get(CLUSTER_LOADBALANCE_KEY);
     }
 
 
