@@ -7,6 +7,5 @@ public interface IRegistrar {
 
     void register(String providerAddress, String service);
 
-//    void subscribe();
     String discover(String service);
 }
