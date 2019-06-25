@@ -1,4 +1,6 @@
-package com.ofcoder.farpc.config;
+package com.ofcoder.farpc.common.config;
+
+import com.ofcoder.farpc.common.uitl.PropertyUtil;
 
 /**
  * @author: yuanyuan.liu

@@ -1,4 +1,6 @@
-package com.ofcoder.farpc.cluster;
+package com.ofcoder.farpc.cluster.loadbalance;
+
+import com.ofcoder.farpc.cluster.ILoadbalance;
 
 import java.util.List;
 import java.util.Random;

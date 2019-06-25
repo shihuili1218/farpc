@@ -1,4 +1,4 @@
-package com.ofcoder.farpc.config;
+package com.ofcoder.farpc.common.uitl;
 
 import java.io.IOException;
 import java.io.InputStream;

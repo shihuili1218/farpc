@@ -1,0 +1,6 @@
+farpc:
+  registry:
+    protocol: zookeeper
+    address: 192.168.1.118:2181
+  cluster:
+    loadbalance: random

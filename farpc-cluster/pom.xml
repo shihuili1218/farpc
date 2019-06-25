@@ -11,5 +11,13 @@
 
     <artifactId>farpc-cluster</artifactId>
 
+    <dependencies>
+
+        <dependency>
+            <groupId>com.ofcoder</groupId>
+            <artifactId>farpc-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>

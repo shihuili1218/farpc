@@ -13,7 +13,7 @@
         <module>farpc-cluster</module>
         <module>farpc-rpc</module>
         <module>farpc-demo</module>
-        <module>farpc-config</module>
+        <module>farpc-common</module>
     </modules>
 
 

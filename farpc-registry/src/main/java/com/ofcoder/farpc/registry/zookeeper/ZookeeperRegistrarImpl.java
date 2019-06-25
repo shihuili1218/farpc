@@ -1,7 +1,8 @@
 package com.ofcoder.farpc.registry.zookeeper;
 
 import com.ofcoder.farpc.cluster.ILoadbalance;
-import com.ofcoder.farpc.cluster.RandomLoadbalanceImpl;
+import com.ofcoder.farpc.cluster.LoadbalanceFactory;
+import com.ofcoder.farpc.cluster.loadbalance.RandomLoadbalanceImpl;
 import com.ofcoder.farpc.registry.IRegistrar;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
@@ -30,15 +31,18 @@ public class ZookeeperRegistrarImpl implements IRegistrar {
 
     private Map<String, List<String>> serviceProviderMap = new HashMap<String, List<String>>();
     private CuratorFramework curatorFramework;
+    private ILoadbalance loadbalance;
 
-    public ZookeeperRegistrarImpl() {
+    public void init(String registerAddress){
         curatorFramework = CuratorFrameworkFactory.builder()
-                .connectString(ZookeeperConfig.ADDRESS)
+                .connectString(registerAddress)
                 .sessionTimeoutMs(SESSION_TIMEOUT_MS)
                 .retryPolicy(new ExponentialBackoffRetry(SLEEP_TIME_MS, MAX_RETRIES))
                 .build();
 
         curatorFramework.start();
+
+        loadbalance = LoadbalanceFactory.getLoadbalance();
     }
 
     public void register(String providerAddress, String service) {
@@ -69,7 +73,6 @@ public class ZookeeperRegistrarImpl implements IRegistrar {
 
             watchProvider(path);
 
-            ILoadbalance loadbalance = new RandomLoadbalanceImpl();
            return loadbalance.select(serviceProviderMap.get(service));
         } catch (Exception e) {
             logger.error(String.format("call ZookeeperRegistrarImpl.discover, occur exception, service:[%s], e.getMessage:[%s]", service, e.getMessage()), e);

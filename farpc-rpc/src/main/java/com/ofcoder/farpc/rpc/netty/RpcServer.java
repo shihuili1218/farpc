@@ -1,6 +1,7 @@
 package com.ofcoder.farpc.rpc.netty;
 
 import com.ofcoder.farpc.registry.IRegistrar;
+import com.ofcoder.farpc.registry.RegistrarFactory;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -31,8 +32,8 @@ public class RpcServer {
     private String selfAddress;
     private Map<String, Object> providers = new HashMap<String, Object>();
 
-    public RpcServer(IRegistrar registrar, String selfAddress) {
-        this.registrar = registrar;
+    public void init(String selfAddress) {
+        this.registrar = RegistrarFactory.getRegistrar();
         this.selfAddress = selfAddress;
     }
 
