@@ -58,9 +58,9 @@ public class NettyConsumerProxy {
                             bootstrap.group(group)
                                     .channel(NioSocketChannel.class)
                                     .option(ChannelOption.TCP_NODELAY, true)
-                                    .handler(new ChannelInitializer<SocketChannel>() {
+                                    .handler(new ChannelInitializer<Channel>() {
                                         @Override
-                                        protected void initChannel(SocketChannel channel) throws Exception {
+                                        protected void initChannel(Channel channel) throws Exception {
                                             ChannelPipeline pipeline = channel.pipeline();
                                             pipeline.addLast("frameDecoder", new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 0, 4));
                                             pipeline.addLast("frameEncoder", new LengthFieldPrepender(4));
@@ -71,8 +71,10 @@ public class NettyConsumerProxy {
                                     });
                             ChannelFuture future = bootstrap.connect(host, port).sync();
 
-                            future.channel().writeAndFlush(requestDTO);
-                            future.channel().closeFuture().sync();
+
+                            Channel channel = future.channel();
+                            channel.writeAndFlush(requestDTO);
+                            channel.closeFuture().sync();
                         } catch (Exception e) {
                             logger.error(e.getMessage(), e);
                         } finally {
