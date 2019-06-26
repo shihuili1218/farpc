@@ -1,11 +1,13 @@
 package com.ofcoder.farpc.rpc;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 /**
  * @author far.liu
  */
 public class RequestDTO implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private String className;
     private String methodName;
@@ -42,5 +44,15 @@ public class RequestDTO implements Serializable {
 
     public void setClassName(String className) {
         this.className = className;
+    }
+
+    @Override
+    public String toString() {
+        return "RequestDTO{" +
+                "className='" + className + '\'' +
+                ", methodName='" + methodName + '\'' +
+                ", types=" + Arrays.toString(types) +
+                ", params=" + Arrays.toString(params) +
+                '}';
     }
 }

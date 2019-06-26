@@ -3,6 +3,8 @@ package com.ofcoder.farpc.rpc.netty;
 import com.ofcoder.farpc.rpc.RequestDTO;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
 import java.util.Map;
@@ -11,7 +13,7 @@ import java.util.Map;
  * @author far.liu
  */
 public class NettyProviderHandler extends ChannelInboundHandlerAdapter {
-
+    private static final Logger logger = LoggerFactory.getLogger(NettyProviderHandler.class);
     private Map<String, Object> providers;
 
     public NettyProviderHandler(Map<String, Object> providers) {
@@ -24,6 +26,7 @@ public class NettyProviderHandler extends ChannelInboundHandlerAdapter {
         RequestDTO requestDTO = (RequestDTO) msg;
         Object result = new Object();
 
+        logger.info("receive request.. {}", requestDTO);
         if (providers.containsKey(requestDTO.getClassName())) {
             Object provider = providers.get(requestDTO.getClassName());
 

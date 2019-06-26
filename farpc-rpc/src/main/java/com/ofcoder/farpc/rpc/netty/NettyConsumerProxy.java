@@ -4,6 +4,7 @@ import com.ofcoder.farpc.registry.IRegistrar;
 import com.ofcoder.farpc.rpc.RequestDTO;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.bootstrap.ServerBootstrap;
+import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -74,6 +75,7 @@ public class NettyConsumerProxy {
 
                             Channel channel = future.channel();
                             channel.writeAndFlush(requestDTO);
+                            logger.info("send request..., {}", requestDTO);
                             channel.closeFuture().sync();
                         } catch (Exception e) {
                             logger.error(e.getMessage(), e);
