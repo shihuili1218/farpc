@@ -63,10 +63,10 @@ public class NettyConsumerProxy {
                                         @Override
                                         protected void initChannel(Channel channel) throws Exception {
                                             ChannelPipeline pipeline = channel.pipeline();
-                                            pipeline.addLast("frameDecoder", new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 0, 4));
-                                            pipeline.addLast("frameEncoder", new LengthFieldPrepender(4));
-                                            pipeline.addLast("decoder", new ObjectDecoder(Integer.MAX_VALUE, ClassResolvers.cacheDisabled(NettyConsumerProxy.class.getClassLoader())));
-                                            pipeline.addLast("encoder", new ObjectEncoder());
+//                                            pipeline.addLast( new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 0,4,10,0));
+//                                            pipeline.addLast( new LengthFieldPrepender(4));
+                                            pipeline.addLast( new ObjectDecoder(Integer.MAX_VALUE, ClassResolvers.cacheDisabled(NettyConsumerProxy.class.getClassLoader())));
+                                            pipeline.addLast( new ObjectEncoder());
                                             pipeline.addLast(consumerHandler);
                                         }
                                     });

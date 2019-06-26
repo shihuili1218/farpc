@@ -22,7 +22,7 @@ public class NettyProviderHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-//        super.channelRead(ctx, msg);
+        super.channelRead(ctx, msg);
         RequestDTO requestDTO = (RequestDTO) msg;
         Object result = new Object();
 
@@ -32,7 +32,7 @@ public class NettyProviderHandler extends ChannelInboundHandlerAdapter {
 
             Class<?> providerClazz = provider.getClass();
             Method method = providerClazz.getMethod(requestDTO.getMethodName(), requestDTO.getTypes());
-            result = method.invoke(providerClazz, requestDTO.getParams());
+            result = method.invoke(provider, requestDTO.getParams());
         }
         ctx.write(result);
         ctx.flush();
