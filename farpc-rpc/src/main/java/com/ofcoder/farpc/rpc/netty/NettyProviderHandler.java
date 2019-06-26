@@ -22,7 +22,7 @@ public class NettyProviderHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        super.channelRead(ctx, msg);
+//        super.channelRead(ctx, msg);
         RequestDTO requestDTO = (RequestDTO) msg;
         Object result = new Object();
 

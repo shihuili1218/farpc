@@ -65,7 +65,7 @@ public class NettyConsumerProxy {
                                             ChannelPipeline pipeline = channel.pipeline();
                                             pipeline.addLast("frameDecoder", new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 0, 4));
                                             pipeline.addLast("frameEncoder", new LengthFieldPrepender(4));
-                                            pipeline.addLast("decoder", new ObjectDecoder(Integer.MAX_VALUE, ClassResolvers.softCachingResolver(NettyProviderServer.class.getClassLoader())));
+                                            pipeline.addLast("decoder", new ObjectDecoder(Integer.MAX_VALUE, ClassResolvers.cacheDisabled(NettyConsumerProxy.class.getClassLoader())));
                                             pipeline.addLast("encoder", new ObjectEncoder());
                                             pipeline.addLast(consumerHandler);
                                         }

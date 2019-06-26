@@ -66,7 +66,7 @@ public class NettyProviderServer {
                             pipeline.addLast("frameDecoder", new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 0, 4));
                             pipeline.addLast("frameEncoder", new LengthFieldPrepender(4));
                             pipeline.addLast("encoder", new ObjectEncoder());
-                            pipeline.addLast("decoder", new ObjectDecoder(Integer.MAX_VALUE, ClassResolvers.softCachingResolver(NettyProviderServer.class.getClassLoader())));
+                            pipeline.addLast("decoder", new ObjectDecoder(Integer.MAX_VALUE, ClassResolvers.cacheDisabled(NettyProviderServer.class.getClassLoader())));
                             pipeline.addLast(new NettyProviderHandler(providers));
                         }
                     }).option(ChannelOption.SO_BACKLOG, 128).childOption(ChannelOption.SO_KEEPALIVE, true);
