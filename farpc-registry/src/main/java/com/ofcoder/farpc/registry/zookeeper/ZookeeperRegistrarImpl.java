@@ -28,6 +28,7 @@ public class ZookeeperRegistrarImpl implements IRegistrar {
     private static final int SLEEP_TIME_MS = 1000;
     private static final int MAX_RETRIES = 2;
     private static final String SEPARATOR = "/";
+    private static final String FOLDER = "/faregistrys";
 
     private Map<String, List<String>> serviceProviderMap = new HashMap<String, List<String>>();
     private CuratorFramework curatorFramework;
@@ -47,7 +48,7 @@ public class ZookeeperRegistrarImpl implements IRegistrar {
 
     public void register(String providerAddress, String service) {
         try {
-            String servicePath = ZookeeperConfig.FOLDER + SEPARATOR + service;
+            String servicePath = FOLDER + SEPARATOR + service;
             Stat stat = curatorFramework.checkExists().forPath(servicePath);
             if (stat == null) {
                 curatorFramework.create().creatingParentsIfNeeded()
@@ -66,7 +67,7 @@ public class ZookeeperRegistrarImpl implements IRegistrar {
 
 
     public String discover(String service) {
-        String path = ZookeeperConfig.FOLDER + SEPARATOR + service;
+        String path = FOLDER + SEPARATOR + service;
         try {
             List<String> provider = curatorFramework.getChildren().forPath(path);
             serviceProviderMap.put(service, provider);
