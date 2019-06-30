@@ -1,1 +1,2 @@
 random=com.ofcoder.farpc.cluster.loadbalance.RandomLoadbalanceImpl
+round=com.ofcoder.farpc.cluster.loadbalance.RoundLoadBalanceImpl

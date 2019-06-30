@@ -3,6 +3,7 @@ package com.ofcoder.farpc.registry.zookeeper;
 import com.ofcoder.farpc.cluster.ILoadbalance;
 import com.ofcoder.farpc.cluster.LoadbalanceFactory;
 import com.ofcoder.farpc.cluster.loadbalance.RandomLoadbalanceImpl;
+import com.ofcoder.farpc.registry.AbstractRegistrar;
 import com.ofcoder.farpc.registry.IRegistrar;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
@@ -22,7 +23,7 @@ import java.util.Map;
 /**
  * @author far.liu
  */
-public class ZookeeperRegistrarImpl implements IRegistrar {
+public class ZookeeperRegistrarImpl extends AbstractRegistrar {
     private static final Logger logger = LoggerFactory.getLogger(ZookeeperRegistrarImpl.class);
     private static final int SESSION_TIMEOUT_MS = 5000;
     private static final int SLEEP_TIME_MS = 1000;
@@ -32,7 +33,6 @@ public class ZookeeperRegistrarImpl implements IRegistrar {
 
     private Map<String, List<String>> serviceProviderMap = new HashMap<String, List<String>>();
     private CuratorFramework curatorFramework;
-    private ILoadbalance loadbalance;
 
     public void init(String registerAddress){
         curatorFramework = CuratorFrameworkFactory.builder()
@@ -43,7 +43,6 @@ public class ZookeeperRegistrarImpl implements IRegistrar {
 
         curatorFramework.start();
 
-        loadbalance = LoadbalanceFactory.getLoadbalance();
     }
 
     public void register(String providerAddress, String service) {
@@ -65,8 +64,8 @@ public class ZookeeperRegistrarImpl implements IRegistrar {
         }
     }
 
-
-    public String discover(String service) {
+    @Override
+    public List<String> lookup(String service) {
         String path = FOLDER + SEPARATOR + service;
         try {
             List<String> provider = curatorFramework.getChildren().forPath(path);
@@ -74,10 +73,10 @@ public class ZookeeperRegistrarImpl implements IRegistrar {
 
             watchProvider(path);
 
-           return loadbalance.select(serviceProviderMap.get(service));
+            return serviceProviderMap.get(service);
         } catch (Exception e) {
             logger.error(String.format("call ZookeeperRegistrarImpl.discover, occur exception, service:[%s], e.getMessage:[%s]", service, e.getMessage()), e);
-            return "";
+            return null;
         }
     }
 
