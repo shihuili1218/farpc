@@ -2,6 +2,7 @@ package com.ofcoder.farpc.demo.provider;
 
 import com.ofcoder.farpc.cluster.ILoadbalance;
 import com.ofcoder.farpc.cluster.LoadbalanceFactory;
+import com.ofcoder.farpc.common.loader.ExtensionLoader;
 import com.ofcoder.farpc.demo.api.IWelcome;
 import com.ofcoder.farpc.registry.IRegistrar;
 import com.ofcoder.farpc.registry.RegistrarFactory;
@@ -38,6 +39,16 @@ public class SpiTest {
         ILoadbalance loadbalance = LoadbalanceFactory.getLoadbalance();
         IRegistrar registrar = RegistrarFactory.getRegistrar();
         System.out.println();
+    }
+
+    @Test
+    public void spiTest(){
+        ILoadbalance round = ExtensionLoader.getExtensionLoader(ILoadbalance.class)
+                .getExtension("round");
+        ILoadbalance random = ExtensionLoader.getExtensionLoader(ILoadbalance.class)
+                .getExtension("random");
+        System.out.println(round.getClass().getName());
+        System.out.println(random.getClass().getName());
     }
 
 }

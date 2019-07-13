@@ -2,6 +2,7 @@ package com.ofcoder.farpc.demo.provider;
 
 import com.ofcoder.farpc.demo.api.IWelcome;
 import com.ofcoder.farpc.registry.IRegistrar;
+import com.ofcoder.farpc.registry.RegistrarFactory;
 import com.ofcoder.farpc.registry.zookeeper.ZookeeperRegistrarImpl;
 import com.ofcoder.farpc.rpc.netty.NettyProviderServer;
 import org.junit.Test;
@@ -26,4 +27,11 @@ public class ProviderTestTest {
         System.in.read();
     }
 
+    @Test
+    public void spiTest() throws IOException {
+        IRegistrar registrar = RegistrarFactory.getRegistrar();
+        registrar.init("127.0.0.1:2181");
+        registrar.register("127.0.0.1:62880", IWelcome.class.getName());
+        System.in.read();
+    }
 }
