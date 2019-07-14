@@ -9,12 +9,6 @@ import com.ofcoder.farpc.common.anno.FarSPI;
 public interface IRegistrar {
 
     /**
-     * 初始化
-     * @param registerAddress zookeeper地址，例如127.0.0.1:2181
-     */
-    void init(String registerAddress);
-
-    /**
      * 注册服务
      * @param providerAddress 服务提供者地址
      * @param service 服务

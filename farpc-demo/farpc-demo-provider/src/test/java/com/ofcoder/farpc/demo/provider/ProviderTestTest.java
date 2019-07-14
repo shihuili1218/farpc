@@ -18,7 +18,6 @@ public class ProviderTestTest {
     public void test() throws IOException {
         IWelcome welcome = new WelcomeImpl();
         IRegistrar registrar = new ZookeeperRegistrarImpl();
-        registrar.init("127.0.0.1:2181");
 
         NettyProviderServer server = new NettyProviderServer();
         server.init("127.0.0.1:20880");
@@ -30,7 +29,6 @@ public class ProviderTestTest {
     @Test
     public void spiTest() throws IOException {
         IRegistrar registrar = RegistrarFactory.getRegistrar();
-        registrar.init("127.0.0.1:2181");
         registrar.register("127.0.0.1:62880", IWelcome.class.getName());
         System.in.read();
     }

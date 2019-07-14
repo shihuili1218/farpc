@@ -1,2 +1,2 @@
 zookeeper=com.ofcoder.farpc.registry.zookeeper.ZookeeperRegistrarImpl
-redis=com.ofcoder.farpc.registry.redis.RedisRegistrar
+redis=com.ofcoder.farpc.registry.redis.RedisRegistrarImpl

@@ -10,10 +10,8 @@ import com.ofcoder.farpc.common.loader.ExtensionLoader;
 public class RegistrarFactory {
 
     public static IRegistrar getRegistrar() {
-        String address = Property.Registry.address;
         String protocol = Property.Registry.protocol;
         IRegistrar extension = ExtensionLoader.getExtensionLoader(IRegistrar.class).getExtension(protocol);
-        extension.init(address);
         return extension;
     }
 }

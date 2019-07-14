@@ -28,13 +28,12 @@ public class ZookeeperRegistrarImpl extends AbstractRegistrar {
     private static final int SESSION_TIMEOUT_MS = 5000;
     private static final int SLEEP_TIME_MS = 1000;
     private static final int MAX_RETRIES = 2;
-    private static final String SEPARATOR = "/";
-    private static final String FOLDER = "/faregistrys";
 
     private Map<String, List<String>> serviceProviderMap = new HashMap<String, List<String>>();
     private CuratorFramework curatorFramework;
 
-    public void init(String registerAddress){
+    @Override
+    protected void init(String registerAddress){
         curatorFramework = CuratorFrameworkFactory.builder()
                 .connectString(registerAddress)
                 .sessionTimeoutMs(SESSION_TIMEOUT_MS)
@@ -63,6 +62,7 @@ public class ZookeeperRegistrarImpl extends AbstractRegistrar {
             logger.error(e.getMessage(), e);
         }
     }
+
 
     @Override
     public List<String> lookup(String service) {
