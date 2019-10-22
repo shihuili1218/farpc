@@ -1,5 +1,6 @@
 package com.ofcoder.farpc.rpc.netty;
 
+import com.ofcoder.farpc.rpc.Container;
 import com.ofcoder.farpc.rpc.RequestDTO;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -14,11 +15,6 @@ import java.util.Map;
  */
 public class NettyProviderHandler extends ChannelInboundHandlerAdapter {
     private static final Logger logger = LoggerFactory.getLogger(NettyProviderHandler.class);
-    private Map<String, Object> providers;
-
-    public NettyProviderHandler(Map<String, Object> providers) {
-        this.providers = providers;
-    }
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
@@ -27,8 +23,8 @@ public class NettyProviderHandler extends ChannelInboundHandlerAdapter {
         Object result = new Object();
 
         logger.info("receive request.. {}", requestDTO);
-        if (providers.containsKey(requestDTO.getClassName())) {
-            Object provider = providers.get(requestDTO.getClassName());
+        if (Container.getProviders().containsKey(requestDTO.getClassName())) {
+            Object provider = Container.getProviders().get(requestDTO.getClassName());
 
             Class<?> providerClazz = provider.getClass();
             Method method = providerClazz.getMethod(requestDTO.getMethodName(), requestDTO.getTypes());

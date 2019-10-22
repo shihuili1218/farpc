@@ -6,6 +6,6 @@ package com.ofcoder.farpc.rpc;
  */
 public interface IProviderServer {
 
-    void start();
+    void start(String selfAddress);
 
 }

@@ -1,4 +1,4 @@
-package com.ofcoder.farpc.rpc.anno;
+package com.ofcoder.farpc.rpc;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -13,5 +13,5 @@ import java.lang.annotation.Target;
 public @interface Provider {
     Class interfaceClazz();
 
-    String name();
+    String name() default "";
 }

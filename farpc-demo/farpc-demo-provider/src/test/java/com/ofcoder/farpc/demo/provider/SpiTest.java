@@ -20,9 +20,7 @@ public class SpiTest {
     @Test
     public void providerTest() throws IOException {
         NettyProviderServer server = new NettyProviderServer();
-        server.init("127.0.0.1:20880");
-        server.bind(IWelcome.class.getName(), new WelcomeImpl());
-        server.publisher();
+        server.start("127.0.0.1:20880");
         System.in.read();
     }
 
