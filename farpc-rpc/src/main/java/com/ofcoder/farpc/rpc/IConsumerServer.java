@@ -1,16 +1,12 @@
 package com.ofcoder.farpc.rpc;
 
-import io.netty.channel.Channel;
+import com.ofcoder.farpc.common.anno.FarSPI;
 
 /**
  * @author: yuanyuan.liu
  * @date: 2019/6/27 9:24
  */
+@FarSPI("netty")
 public interface IConsumerServer {
-    void open();
-
-    void connect();
-
-    Channel getChannel();
-
+    Object execute(String address, RequestDTO requestDTO);
 }

@@ -6,7 +6,10 @@ import com.ofcoder.farpc.common.loader.ExtensionLoader;
 import com.ofcoder.farpc.demo.api.IWelcome;
 import com.ofcoder.farpc.registry.IRegistrar;
 import com.ofcoder.farpc.registry.RegistrarFactory;
-import com.ofcoder.farpc.rpc.netty.NettyConsumerProxy;
+import com.ofcoder.farpc.rpc.ConsumerProxy;
+import com.ofcoder.farpc.rpc.IConsumerServer;
+import com.ofcoder.farpc.rpc.IProviderServer;
+import com.ofcoder.farpc.rpc.RpcFactory;
 import com.ofcoder.farpc.rpc.netty.NettyProviderServer;
 import org.junit.Test;
 
@@ -27,7 +30,7 @@ public class SpiTest {
     @Test
     public void consumerTest(){
         IRegistrar registrar = RegistrarFactory.getRegistrar();
-        IWelcome welcome = NettyConsumerProxy.create(registrar, IWelcome.class);
+        IWelcome welcome = ConsumerProxy.create(registrar, IWelcome.class);
         String far = welcome.greet("far");
         System.out.println(far);
     }

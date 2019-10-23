@@ -10,6 +10,7 @@ public class Property {
     private static String REGISTRY_PROTOCOL_KEY = "farpc.registry.protocol";
     private static String REGISTRY_ADDRESS_KEY = "farpc.registry.address";
     private static String CLUSTER_LOADBALANCE_KEY = "farpc.cluster.loadbalance";
+    private static String RPC_PROTOCOL_KEY = "farpc.rpc.protocol";
 
     public static class Registry {
         public static String protocol = PropertyUtil.getInstance().get(REGISTRY_PROTOCOL_KEY);
@@ -20,5 +21,8 @@ public class Property {
         public static String loadbalance = PropertyUtil.getInstance().get(CLUSTER_LOADBALANCE_KEY);
     }
 
+    public static class Rpc {
+        public static String protocol = PropertyUtil.getInstance().get(RPC_PROTOCOL_KEY);
+    }
 
 }

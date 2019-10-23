@@ -1,7 +1,7 @@
 package com.ofcoder.farpc.demo.provider;
 
 import com.ofcoder.farpc.demo.api.IWelcome;
-import com.ofcoder.farpc.rpc.Provider;
+import com.ofcoder.farpc.rpc.anno.Provider;
 
 /**
  * @author far.liu

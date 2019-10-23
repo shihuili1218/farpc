@@ -1,0 +1,1 @@
+netty=com.ofcoder.farpc.rpc.netty.NettyProviderServer

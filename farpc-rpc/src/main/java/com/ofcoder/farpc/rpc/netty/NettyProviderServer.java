@@ -1,6 +1,6 @@
 package com.ofcoder.farpc.rpc.netty;
 
-import com.ofcoder.farpc.rpc.Container;
+import com.ofcoder.farpc.rpc.anno.Container;
 import com.ofcoder.farpc.rpc.IProviderServer;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
