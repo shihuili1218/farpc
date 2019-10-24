@@ -29,8 +29,7 @@ public class SpiTest {
 
     @Test
     public void consumerTest(){
-        IRegistrar registrar = RegistrarFactory.getRegistrar();
-        IWelcome welcome = ConsumerProxy.create(registrar, IWelcome.class);
+        IWelcome welcome = ConsumerProxy.create(IWelcome.class);
         String far = welcome.greet("far");
         System.out.println(far);
     }
