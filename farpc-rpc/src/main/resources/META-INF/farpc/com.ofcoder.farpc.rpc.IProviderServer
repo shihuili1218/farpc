@@ -1,1 +1,2 @@
 netty=com.ofcoder.farpc.rpc.netty.NettyProviderServer
+http=com.ofcoder.farpc.rpc.http.HttpProviderServer

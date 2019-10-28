@@ -1,1 +1,2 @@
 netty=com.ofcoder.farpc.rpc.netty.NettyConsumerServer
+http=com.ofcoder.farpc.rpc.http.HttpConsumerServer

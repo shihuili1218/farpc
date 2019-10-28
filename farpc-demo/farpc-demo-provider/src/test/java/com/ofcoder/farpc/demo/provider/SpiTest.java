@@ -22,7 +22,7 @@ import java.io.IOException;
 public class SpiTest {
     @Test
     public void providerTest() throws IOException {
-        NettyProviderServer server = new NettyProviderServer();
+        IProviderServer server = RpcFactory.getProviderServer();
         server.start("127.0.0.1:20880");
         System.in.read();
     }
